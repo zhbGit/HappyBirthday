@@ -17,7 +17,9 @@
 		color:#fff
 	}
 </style>
-<audio autoplay="" loop=""><source src="birthdayLS.mp3"></audio>
+<!--<audio autoplay="" loop=""><source src="birthdayLS.mp3"></audio>-->
+
+<audio loop src="birthdayLS.mp3" id="audio" autoplay preload="auto"></audio>
 <canvas id="canvas" width="500" height="500"></canvas>   
 
 <script>
@@ -149,6 +151,17 @@ var loop = function(){
 
 loop();
 
+
+document.addEventListener('DOMContentLoaded', function () {
+    function audioAutoPlay() {
+        var audio = document.getElementById('audio');
+            audio.play();
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            audio.play();
+        }, false);
+    }
+    audioAutoPlay();
+});
 </script>
 
 </body>
