@@ -152,16 +152,14 @@ var loop = function(){
 loop();
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    function audioAutoPlay() {
-        var audio = document.getElementById('audio');
-            audio.play();
-        document.addEventListener("WeixinJSBridgeReady", function () {
-            audio.play();
-        }, false);
-    }
-    audioAutoPlay();
-});
+  document.addEventListener('WeixinJSBridgeReady', function() {
+        document.getElementById('audio').play()
+    })
+	
+	document.addEventListener('touchstart', function() {
+        document.getElementById('audio').play()
+    })
+autoPlayMusic();
 </script>
 
 </body>
