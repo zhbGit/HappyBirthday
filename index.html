@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>烟火</title>
+<title class="myTitle">祝秋丽同学生日快乐</title>
 
 <script src="jquery.min.js"></script>
 <script src="canvas.js"></script>
@@ -11,7 +11,13 @@
 	
 </head>
 <body>
-
+<style>
+	.myTitle{
+		background:#FF44AA;
+		color:#fff
+	}
+</style>
+<audio autoplay="" loop=""><source src="birthdayLS.mp3"></audio>
 <canvas id="canvas" width="500" height="500"></canvas>   
 
 <script>
@@ -23,7 +29,7 @@ var canvas = $$("canvas"),
 	//烟火形状                                                        圆形                                                              椭圆形                                                          爱心形
 	fireworkTypeList = [createCircleFirework, createEllipseFirework, createHeartFirework],
 	totalNum = 0,//发射烟火的总数量
-	surprise_num = 5,//当发射烟火数量达到25时,发射生日快乐字样的烟火
+	surprise_num = 25,//当发射烟火数量达到25时,发射生日快乐字样的烟火
 	flag = true;//是否发射生日快乐字样的烟火
 	canvas.width = $(window).width() - 15;
 	canvas.height = $(window).height() - 20;
@@ -63,6 +69,7 @@ var init = function(firework,params){//初始化一个烟火
 	beforeBalst.setColor("#FFFFFF");//白色
 	beforeBalst.setLife(50 + Math.floor(Math.random() * 50));//烟花从发射到爆炸的时间,单位为帧,即50-100帧后爆炸
 	beforeBalst.setBase();//记录烟花发射的初始状态
+	
 }
 
 for(var i = 0; i < n; i++){//初始化n个烟火
@@ -83,15 +90,29 @@ var draw = function(){//描绘每一帧烟火的状态
 	$.each(fireworkList,function(index,value){
 		value.draw();
 	});
-	
 	ctx.fillStyle = "#000";
 	ctx.fillRect(0,0,800,400);
 	ctx.fillStyle = "#FF44AA";
 	ctx.font = "bold 40px '字体','字体','微软雅黑','宋体'"; //设置字体
-	ctx.fillText("秋丽同学，生日快乐",150,300);
-	ctx.fillText("愿你天黑有灯，下雨有伞，余生有良人相伴",150,250);
-	ctx.fillText("愿你一生笑撵如花",150,200);
-	ctx.fillText("愿你所愿，终能实现",150,150);
+
+	var t = 0
+	if(t < 6){
+		console.log(t);
+		setInterval(function(){
+			t++
+			if(t==1){
+				ctx.fillText("秋丽同学，生日快乐",150,150);
+			}else if(t==2){
+				ctx.fillText("愿你天黑有灯，下雨有伞，余生有良人相伴",150,200);
+			}else if(t==3){
+				ctx.fillText("愿微风不噪,时光不老,你一辈子欢笑。",150,250);
+			}else if(t==4){
+				ctx.fillText("愿你一生笑撵如花",150,300);
+			}else if(t==5){
+				ctx.fillText("愿你所愿，终能实现",150,350);
+			}
+		},2500);
+	}
 };
 
 var update = function(){//更新每一帧烟火的状态
@@ -102,7 +123,7 @@ var update = function(){//更新每一帧烟火的状态
 			if(totalNum < surprise_num){//当发射烟火数量没到25
 				var firework = Firework.getInstance();//继续生成新的烟火
 				init(firework);
-				fireworkList.push(firework);
+				fireworkList.push(firework);				
 				totalNum++;
 			}  
 			if(fireworkList.length == 0 && flag){//发射生日快乐烟火和一箭穿心烟火
@@ -127,6 +148,7 @@ var loop = function(){
 };
 
 loop();
+
 </script>
 
 </body>
